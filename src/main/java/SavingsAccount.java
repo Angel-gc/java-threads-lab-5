@@ -2,15 +2,17 @@ public class SavingsAccount {
 
   private long total = 0;
 
-  public boolean withdraw(long amount) {
-      
+  public synchronized boolean withdraw(long amount) {
+      if (amount > total) return false;
+      total -= amount;
+      return true;
   }
 
-  public void deposit(long amount) {
-
+  public synchronized void deposit(long amount) {
+      total+= amount;
   }
 
-  public long getTotal() {
+  public synchronized long getTotal() {
       return total;
   }
 }
